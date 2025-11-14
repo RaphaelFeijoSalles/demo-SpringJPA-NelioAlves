@@ -3,6 +3,7 @@ package com.example.demo.repositories;
 import com.example.demo.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+//interface herda @Repository do JpaRepository
 public interface UserRepository extends JpaRepository<User, Long> {
     //SpringDataJPA já tem uma implementação padrão para essa interface
 }
