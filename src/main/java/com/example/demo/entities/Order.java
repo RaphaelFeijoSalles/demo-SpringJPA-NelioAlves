@@ -4,8 +4,6 @@ import com.example.demo.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
-import java.io.Serial;
-import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Objects;
@@ -13,10 +11,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "tb_order")
-public class Order implements Serializable {
-
-    @Serial
-    private static final long serialVersionUID = 1L;
+public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -80,6 +75,7 @@ public class Order implements Serializable {
     public Set<OrderItem> getItems() {
         return items;
     }
+
 
     @Override
     public boolean equals(Object o) {
