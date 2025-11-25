@@ -1,5 +1,6 @@
 package com.example.demo.resources.exceptions;
 
+import com.example.demo.services.exceptions.DataBaseException;
 import com.example.demo.services.exceptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -23,5 +24,13 @@ public class ResourceExceptionHandler {
         HttpStatus status = HttpStatus.NOT_FOUND; //Retorna o código 404 (o mais apropriado para "não encontrado")
         StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(err); //Retorna o body dos campos JSON personalizados
+    }
+
+    @ExceptionHandler(DataBaseException.class)
+    public ResponseEntity<StandardError> resourceNotFound(DataBaseException e, HttpServletRequest request){
+        String error = "Database error";
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(status).body(err);
     }
 }
